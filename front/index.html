@@ -9,8 +9,68 @@
 </head>
 
 <body onload="buscaFilmes()">
-    <div class="container mt-5">
 
+    <div class="modal fade" id="modalCadastro"
+        aria-labelledby="modalCadastro" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Cadastro de Usuário</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="d-none alert alert-dismissible fade
+                                alert-modal-cadastro" role="alert">
+                    </div>
+                    <form>
+                        <div class="mb-3">
+                            <label for="usuarioCadastroInput"
+                            class="col-form-label">Usuario</label>
+                            <input type="text" id="usuarioCadastroInput"
+                            class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="senhaCadastroInput"
+                            class="col-form-label">Senha</label>
+                            <input type="text" id="senhaCadastroInput"
+                            class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <nav class="navbar navbar-expand-md bg-light">
+                    <a class="navbar-brand" href="#">Filmes</a>
+                    
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavBar"
+                        aria-controls="#myNavBar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggle-icon"></span>
+                    </button> 
+
+                    <div class="navbar-collapse collapse" id="myNavBar">
+                        <div class="navbar-nav ms-auto">
+                            <a class="nav-link active me-2" href="#">Login</a>
+                        </div>
+                        <div class="navbar-nav ms-auto">
+                            <a class="nav-link active me-2" 
+                            data-bs-target="modalCadastro"
+                            data-bs-toggle="modal"
+                            href="#">Novo Usuário</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-4">
                 <div class="form-floating mb-3">
