@@ -3,6 +3,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const app = express()
 app.use(express.json())
 app.use(cors())
@@ -22,17 +23,6 @@ const Usuario = mongoose.model("Usuario", usuarioSchema)
 async function conectarMongo () {
     await mongoose.connect(`mongodb+srv://pro_mac:machion@cluster0.skf8n.mongodb.net/?retryWrites=true&w=majority`)
 }
-
-// let filmes = [
-//     {
-//         titulo: "Forrest Gump - O Contador de Histórias",
-//         sinopse: "Quarenta anos da história dos Estados Unidos vistos pelos olhos de Forrest Gump (Tom Hanks), um rapaz de QI abaixo da média e cheio de boas intenções."
-//     },
-//     {
-//         titulo: "Um Sonho de Liberdade",
-//         sinopse: "Em 1946, Andy Dufresne (Tim Robbins), um jovem e bem sucedido banqueiro, tem a sua vida radicalmente modificada ao ser condenado por um crime que nunca cometeu, o homicídio de sua esposa e do amante dela."
-//     }
-// ]
 
 app.get('/filmes', async (req, res) => {
     const filmes = await Filme.find()
@@ -81,8 +71,14 @@ app.post('/login', async (req, res) => {
         //usuário não autorizado, código 401
         return res.status(401).json({mensagem: "senha inválida"})
     }
-    //se tudo deu certo, passamos a bola oara o frontend, já já
-    res.end()
+    //se tudo deu certo, vamos gerar o token para aramazenamento lá no front
+    const token = jwt.sign(
+        {login: login},
+        //vamos usar uma chave secreta gerada daqui a há pouco
+        "chave_secreta",
+        {expiresIn: "1h"}
+    )
+    res.status(200).json({token: token})
 })
 
 app.listen(3000, () => {
