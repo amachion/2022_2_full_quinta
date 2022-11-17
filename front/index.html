@@ -24,20 +24,23 @@
                     <form>
                         <div class="mb-3">
                             <label for="usuarioCadastroInput"
-                            class="col-form-label">Usuario</label>
+                            class="col-form-label">Usuário</label>
                             <input type="text" id="usuarioCadastroInput"
                             class="form-control">
                         </div>
                         <div class="mb-3">
                             <label for="senhaCadastroInput"
                             class="col-form-label">Senha</label>
-                            <input type="text" id="senhaCadastroInput"
+                            <input type="password" id="senhaCadastroInput"
                             class="form-control">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-
+                    <button class="btn btn-secondary" 
+                    type="button" data-bs-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary"
+                    type="button" onclick="cadastrarUsuario()">Cadastrar</button>
                 </div>
             </div>
         </div>
@@ -49,9 +52,10 @@
                 <nav class="navbar navbar-expand-md bg-light">
                     <a class="navbar-brand" href="#">Filmes</a>
                     
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavBar"
+                    <button class="navbar-toggler" type="button" 
+                        data-bs-toggle="collapse" data-bs-target="#myNavBar"
                         aria-controls="#myNavBar" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggle-icon"></span>
+                        <span class="navbar-toggler-icon"></span>
                     </button> 
 
                     <div class="navbar-collapse collapse" id="myNavBar">
@@ -59,8 +63,8 @@
                             <a class="nav-link active me-2" href="#">Login</a>
                         </div>
                         <div class="navbar-nav ms-auto">
-                            <a class="nav-link active me-2" 
-                            data-bs-target="modalCadastro"
+                            <a class="nav-link me-2" 
+                            data-bs-target="#modalCadastro"
                             data-bs-toggle="modal"
                             href="#">Novo Usuário</a>
                         </div>

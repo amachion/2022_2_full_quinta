@@ -30,7 +30,7 @@ async function cadastrarFilme() {
   let titulo = tituloInput.value;
   let sinopse = sinopseInput.value;
   tituloInput.value = "";
-  sinopseInput.value = "";  
+  sinopseInput.value = "";
   if (titulo && sinopse) {
     const filmes = (await axios.post(URLcompleta, { titulo, sinopse })).data;
     let tabela = document.querySelector(".filmes");
@@ -43,14 +43,54 @@ async function cadastrarFilme() {
       celulaTitulo.innerHTML = filme.titulo;
       celulaSinopse.innerHTML = filme.sinopse;
     }
+  } else {
+    let alert = document.querySelector(".alert");
+    alert.classList.add("show");
+    alert.classList.remove("d-none");
+    setTimeout(() => {
+      alert.classList.add("d-none");
+      alert.classList.remove("show");
+    }, 2000);
   }
-  else {
-    let alert = document.querySelector('.alert')
-    alert.classList.add('show')
-    alert.classList.remove('d-none')
-    setTimeout (() => {
-        alert.classList.add('d-none')
-        alert.classList.remove('show')
-    }, 3000)
+}
+
+async function cadastrarUsuario() {
+  let usuarioCadastroInput = document.querySelector("#usuarioCadastroInput");
+  let senhaCadastroInput = document.querySelector("#senhaCadastroInput");
+  let usuarioCadastro = usuarioCadastroInput.value;
+  let senhaCadastro = senhaCadastroInput.value;
+  if (usuarioCadastro && senhaCadastro) {
+    //vamos realizar cadastro
+    try {
+      const cadastroUsuarioEndpoint = "/signup";
+      const URLcompleta = `${protocolo}${baseURL}${cadastroUsuarioEndpoint}`;
+      await axios.post(URLcompleta, {
+        login: usuarioCadastro,
+        senha: senhaCadastro,
+      });
+      usuarioCadastroInput.value = "";
+      senhaCadastroInput.value = "";
+      let alert = document.querySelector(".alert-modal-cadastro");
+      alert.innerHTML = "usuário cadastrado com sucesso";
+      alert.classList.add("show", "alert-sucsses");
+      alert.classList.remove("d-none");
+      setTimeout(() => {
+        alert.classList.remove("show");
+        alert.classList.add("d-none");
+      }, 2000);
+      let modal = bootstrap.Modal.getInstance(
+        document.querySelector("#modalCadastro")
+      );
+      modal.hide();
+    } catch (error) {}
+  } else {
+    let alert = document.querySelector(".alert-modal-cadastro");
+    alert.innerHTML = "Preencha toda as informações";
+    alert.classList.add("show", "alert-danger");
+    alert.classList.remove("d-none");
+    setTimeout(() => {
+      alert.classList.remove("show");
+      alert.classList.add("d-none");
+    }, 2000);
   }
 }
